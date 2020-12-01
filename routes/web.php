@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard_Controller;
 use App\Http\Controllers\Sport_Controller;
 use App\Http\Controllers\League_controller;
+use App\Http\Controllers\Game_Controller;
+use App\Http\Controllers\GameBet_Controller;
+use App\Http\Controllers\Team_Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +21,10 @@ use App\Http\Controllers\League_controller;
 Route::get('/', [Sport_Controller::class, 'getSports']);
 Route::get('/leagues/{id}', [League_controller::class, 'getLeagues']);
 Route::get('/league/{id}', [League_controller::class, 'getLeague']);
+Route::get('/game/{id}', [Game_Controller::class, 'getGame']);
+Route::get('/gamebet/{id}', [GameBet_Controller::class, 'getGamebet']);
+Route::get('/team/{id}', [Team_Controller::class, 'getTeam']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

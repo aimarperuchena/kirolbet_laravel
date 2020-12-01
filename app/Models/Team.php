@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Odds extends Model
+class Team extends Model
 {
     use HasFactory;
-    protected $table = 'odds';
-    protected $fillable = ['id', 'game_bet_id', 'odd', 'des','created_at'];
+    protected $table = 'team';
+    protected $fillable = ['id', 'sport_id', 'des'];
+
 }
