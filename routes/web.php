@@ -7,6 +7,7 @@ use App\Http\Controllers\League_controller;
 use App\Http\Controllers\Game_Controller;
 use App\Http\Controllers\GameBet_Controller;
 use App\Http\Controllers\Team_Controller;
+use App\Http\Controllers\Admin_Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,4 +28,4 @@ Route::get('/team/{id}', [Team_Controller::class, 'getTeam']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\Admin_Controller::class, 'indexDashboard'])->name('home');
