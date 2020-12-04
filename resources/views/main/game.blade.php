@@ -26,7 +26,7 @@
                     <div class="row">
                         @foreach($teams as $team)
                         <div class="col">
-                        <a href="/team/{{$team->id}}" style="text-decoration:none;" class="text-dark""><button type="button" class="btn btn-primary">{{$team->des}}</button></a>
+                        <a href="/team/{{$team->id}}" style="text-decoration:none;" "><button type="button" class="btn btn-primary">{{$team->des}}</button></a>
                         </div>
                         @endforeach
                     </div>
@@ -54,7 +54,7 @@
                 <tbody>
                     @foreach($game_bets as $game_bet)
                     <tr>
-                        <td><a href="/gamebet/{{$game_bet->id}}" style="text-decoration:none;" class="text-dark">{{$game_bet->des}}</a></td>
+                        <td><a href="/gamebet/{{$game_bet->id}}" style="text-decoration:none;" >{{$game_bet->des}}</a></td>
                     </tr>
                     @endforeach
 

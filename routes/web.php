@@ -26,6 +26,11 @@ Route::get('/game/{id}', [Game_Controller::class, 'getGame']);
 Route::get('/gamebet/{id}', [GameBet_Controller::class, 'getGamebet']);
 Route::get('/team/{id}', [Team_Controller::class, 'getTeam']);
 
+Route::get('/admin/leagues/{id}', [Admin_Controller::class, 'indexLeagues']);
+Route::get('/admin/league/{id}', [Admin_Controller::class, 'indexLeague']);
+Route::get('/admin/game/{id}', [Admin_Controller::class, 'indexGame']);
+
+
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\Admin_Controller::class, 'indexDashboard'])->name('home');

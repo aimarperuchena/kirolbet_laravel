@@ -1,20 +1,20 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
+<div class="container ">
 
-    <div class="card text-left">
+    <div class="card ">
         <div class="card-body">
             <h4 class="card-title">Sports</h4>
-            <table class="table table-hover  table-sm table-border">
+            <table class="table table-bordered table-sm ">
                 <thead>
                     <th>Sport</th>
 
                 </thead>
                 <tbody>
                     @foreach($sports as $sport)
-                    <tr >
-                        <td><a href="/leagues/{{$sport->id}}" style="text-decoration:none;" class="text-dark">{{$sport->des}}</a></td>
+                    <tr>
+                        <td><a href="/leagues/{{$sport->id}}" style="text-decoration:none;">{{$sport->des}}</a></td>
                     </tr>
 
                     @endforeach

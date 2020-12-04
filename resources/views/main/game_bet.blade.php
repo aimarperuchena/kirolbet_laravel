@@ -23,15 +23,15 @@
             <div class="row">
                 @foreach($teams as $team)
                 <div class="col">
-                    <a href="/team/{{$team->id}}" style="text-decoration:none;" class="text-dark""><button type=" button" class="btn btn-primary">{{$team->des}}</button></a>
+                    <a href="/team/{{$team->id}}" style="text-decoration:none;" "><button type=" button" class="btn btn-primary">{{$team->des}}</button></a>
                 </div>
                 @endforeach
             </div>
             <div class="row mt-2">
                 <div class="col">@if($surebet>0)
-                    <button type="button" class="btn btn-success" disabled>Surebet: {{$surebet}}</button>
+                    <button type="button" class="btn btn-success rounded" >Surebet: {{$surebet}}</button>
                     @else
-                    <button type="button" class="btn btn-danger" disabled>Surebet: {{$surebet}}</button>
+                    <button type="button" class="btn btn-danger rounded" >Surebet: {{$surebet}}</button>
 
                     @endif</div>
             </div>
@@ -58,13 +58,13 @@
                                 <p>{{$row[0]}}</p>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger btn-block" disabled> {{$row[3]}}</button>
+                                <button type="button" class="btn btn-danger btn-block rounded" > {{$row[3]}}</button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-secondary btn-block" disabled> {{$row[1]}}</button>
+                                <button type="button" class="btn btn-info btn-block rounded" > {{$row[1]}}</button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-success  btn-block" disabled> {{$row[2]}}</button>
+                                <button type="button" class="btn btn-success  btn-block rounded" > {{$row[2]}}</button>
                             </td>
                         </tr>
                         @endforeach

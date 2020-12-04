@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach($leagues as $league)
                     <tr>
-                        <td><a href="/league/{{$league->id}}" style="text-decoration:none;" class="text-dark">{{$league->des}}</a></td>
+                        <td><a href="/league/{{$league->id}}" style="text-decoration:none;" >{{$league->des}}</a></td>
 
                     </tr>
 

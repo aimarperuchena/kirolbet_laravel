@@ -1,9 +1,12 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
+// Bootstrap
+// Variables 
+@import '~bootswatch/dist/materia/variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+// Bootswatch
+@import "~bootswatch/dist/materia/bootswatch";
 @import "node_modules/font-awesome/scss/font-awesome.scss";

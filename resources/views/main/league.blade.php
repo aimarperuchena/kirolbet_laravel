@@ -32,8 +32,8 @@
                                 <tbody>
                                     @foreach($games as $game)
                                     <tr>
-                                        <td class="row-text"> <a href="/game/{{$game->id}}" style="text-decoration:none;" class="text-dark"">{{$game->game}}</a></td> 
-                              <td><a href="/game/ {{$game->id}}" style="text-decoration:none;" class="text-dark">{{$game->date_time}}</a></td>
+                                        <td class="row-text"> <a href="/game/{{$game->id}}" style="text-decoration:none;" ">{{$game->game}}</a></td> 
+                              <td><a href="/game/ {{$game->id}}" style="text-decoration:none;" >{{$game->date_time}}</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -65,7 +65,7 @@
                                 <tbody>
                                     @foreach($teams as $team)
                                     <tr>
-                                        <td class="row-text"> <a href="/team/{{$team->id}}" style="text-decoration:none;" class="text-dark"">{{$team->des}}</a></td>
+                                        <td class="row-text"> <a href="/team/{{$team->id}}" style="text-decoration:none;" ">{{$team->des}}</a></td>
                            </tr>
                            @endforeach
                         </tbody>

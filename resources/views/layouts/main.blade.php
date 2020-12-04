@@ -9,6 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Kirolbet Stats</title>
+    <link rel="stylesheet" type="text/css" href="{{url('assets/css/bootstrap.min.css')}}"/> 
+    <link rel="stylesheet" type="text/css" href="{{url('assets/css/custom.css')}}"/> 
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
