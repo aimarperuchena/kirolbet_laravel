@@ -64,7 +64,7 @@ class Admin_Controller extends Controller
 
     public function indexGame($id)
     {
-        $game=Game::where('id',$id)->first();
+        $game = Game::where('id', $id)->first();
         return view('admin.game')->with('game', $game);
     }
 }

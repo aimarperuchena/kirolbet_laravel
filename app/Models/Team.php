@@ -14,4 +14,8 @@ class Team extends Model
     {
         return $this->hasMany(Game_Team::class);
     }
+    public function sport()
+    {
+        return $this->belongsTo(Sport::class, 'sport_id');
+    }
 }

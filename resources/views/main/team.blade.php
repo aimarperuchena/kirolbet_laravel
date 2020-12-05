@@ -3,20 +3,18 @@
 <div class="container">
     <div class="card text-left">
         <div class="card-body">
-            <h4 class="card-title">{{$team[0]->team}} {{$team[0]->sport}} </h4>
+            <h4 class="card-title">{{$team->des}} {{$team->sport->des}} </h4>
+
             <div class="accordion" id="accordionExample">
                 <div class=" card">
                     <div class="card-header" id="headingOne">
-
                         <h2 class="mb-0">
-
-                                <button class="btn btn-light btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseTwo">
-                                    Games
-                                </button>
+                            <button class="btn btn-light btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseTwo">
+                                Games
+                            </button>
                         </h2>
                     </div>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-
                         <div class="card-body">
                             <div class="input-group mb-1 justify-content-center">
                                 <div class="input-group-prepend">
@@ -30,10 +28,11 @@
                                     <th>Date</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($games as $game)
+                                    @foreach($team->game_team as $game_team)
+
                                     <tr>
-                                        <td class="row-text"> <a href="/game/{{$game->id}}" style="text-decoration:none;" ">{{$game->game}}</a></td>
-                              <td><a href="/game/ {{$game->id}}" style="text-decoration:none;" >{{$game->date_time}}</a></td>
+                                    <td class="row-text"> <a href="/game/{{$game_team->game->id}}" style="text-decoration:none;" ">{{$game_team->game->game}}</a></td>
+                                    <td class="row-text"> <a href="/game/{{$game_team->game->id}}" style="text-decoration:none;" ">{{$game_team->game->date}}</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -66,14 +65,17 @@
                   </div>
                </div>
             </div>
-            
-         </div>
-      </div>
-   </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
 </div>
 <script>
-   $(document).ready(function() {
-       $(" #myInput").on("keyup", function() { var value=$(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).text().toLowerCase().indexOf(value)> -1)
+    $(document).ready(function() {
+        $(" #myInput").on("keyup", function() { var value=$(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).text().toLowerCase().indexOf(value)> -1)
                                                 });
                                                 });
                                                 });
