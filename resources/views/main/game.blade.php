@@ -12,22 +12,23 @@
                             <h4 class="card-title">{{$game->game}}</h4>
                         </div>
                         <div class="col-6">
-                            <h4 class="card-title">{{$game->league}}</h4>
+                            <h4 class="card-title">{{$game->league->des}}</h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p class="card-text">{{$game->date_time}}</p>
+                            <p class="card-text">{{$game->date}}{{$game->time}}</p>
                         </div>
                         <div class="col-6">
-                            <p class="card-text">{{$game->sport}}</p>
+                            <p class="card-text">{{$game->sport->des}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        @foreach($teams as $team)
+                        @foreach($game->team as $team)
                         <div class="col">
-                        <a href="/team/{{$team->id}}" style="text-decoration:none;" "><button type="button" class="btn btn-primary">{{$team->des}}</button></a>
+                            <a href="/team/{{$team->team->id}}" style="text-decoration:none;" "><button type=" button" class="btn btn-primary">{{$team->team->des}}</button></a>
                         </div>
+
                         @endforeach
                     </div>
 
@@ -40,21 +41,21 @@
         <div class="col">
             <div class="input-group mb-1 justify-content-center">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-search"/></span>
+                    <span class="input-group-text"><i class="fas fa-search" /></span>
                 </div>
                 <input type="text" id="myInput" class="form-control border" placeholder="Search for markets.." title="Type in a market">
             </div>
             <table class="table table-hover  table-sm table-bordered mt-3" id="myTable">
                 <thead>
                     <tr>
-                        <th scope="col">Market</th >
+                        <th scope="col">Market</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($game_bets as $game_bet)
+                    @foreach($game->game_bets as $game_bet)
                     <tr>
-                        <td><a href="/gamebet/{{$game_bet->id}}" style="text-decoration:none;" >{{$game_bet->des}}</a></td>
+                        <td><a href="/gamebet/{{$game_bet->id}}" style="text-decoration:none;">{{$game_bet->market->des}}</a></td>
                     </tr>
                     @endforeach
 

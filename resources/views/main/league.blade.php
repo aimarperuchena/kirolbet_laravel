@@ -2,16 +2,15 @@
 @section('content')
 <div class="container">
     <div class="card text-left">
-        <img class="card-img-top" src="holder.js/100px180/" alt="">
         <div class="card-body">
-            <h4 class="card-title">{{$league->league}} <a href="/leagues/{{$sport->id}}" class="btn btn-light btn-lg active" role="button" aria-pressed="true">{{$league->sport}}</a>
+            <h4 class="card-title">{{$league->des}} <a href="/leagues/{{$league->sport->id}}" class="btn btn-light btn-lg active" role="button" aria-pressed="true">{{$league->sport->des}}</a>
             </h4>
+
             <div class="accordion" id="accordionExample">
                 <div class=" card">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                             <button class="btn btn-light btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-
                                 Games
                             </button>
                         </h2>
@@ -30,10 +29,10 @@
                                     <th>Date</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($games as $game)
+                                    @foreach($league->games as $game)
                                     <tr>
-                                        <td class="row-text"> <a href="/game/{{$game->id}}" style="text-decoration:none;" ">{{$game->game}}</a></td> 
-                              <td><a href="/game/ {{$game->id}}" style="text-decoration:none;" >{{$game->date_time}}</a></td>
+                                        <td class="row-text"> <a href="/game/{{$game->id}}" style="text-decoration:none;" ">{{$game->game}}</a></td>
+                              <td><a href="/game/ {{$game->id}}" style="text-decoration:none;">{{$game->date}}</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -41,7 +40,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
@@ -68,18 +66,21 @@
                                         <td class="row-text"> <a href="/team/{{$team->id}}" style="text-decoration:none;" ">{{$team->des}}</a></td>
                            </tr>
                            @endforeach
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 <script>
-   $(document).ready(function() {
-       $(" #myInput").on("keyup", function() { var value=$(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).text().toLowerCase().indexOf(value)> -1)
+    $(document).ready(function() {
+        $(" #myInput").on("keyup", function() { var value=$(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).text().toLowerCase().indexOf(value)> -1)
                                                 });
                                                 });
                                                 });

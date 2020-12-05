@@ -24,4 +24,8 @@ class Sport extends Model
     {
         return $this->hasMany(Surebet::class);
     }
+    public function team()
+    {
+        return $this->hasMany(Team::class);
+    }
 }
