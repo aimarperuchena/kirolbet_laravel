@@ -9,8 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Kirolbet Stats</title>
-    <link rel="stylesheet" type="text/css" href="{{url('assets/css/bootstrap.min.css')}}"/> 
-    <link rel="stylesheet" type="text/css" href="{{url('assets/css/custom.css')}}"/> 
+    <link rel="stylesheet" type="text/css" href="{{url('assets/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url('assets/css/custom.css')}}" />
 
 
     <!-- Scripts -->
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-   
+
 </head>
 
 <body class="body">
@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="/">Sports</a>
                         </li>
                     </ul>
@@ -62,15 +62,19 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="/dashboard" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/dashboard">
+                                    Dashboard
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

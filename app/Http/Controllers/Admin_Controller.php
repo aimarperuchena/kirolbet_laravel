@@ -64,11 +64,7 @@ class Admin_Controller extends Controller
 
     public function indexGame($id)
     {
-        $game = DB::select('select game.id, game, Concat(DATE_FORMAT(date, "%Y/%m/%d")," ", time+ INTERVAL 1 HOUR) as date_time, sport.des as sport, league.des as league from game, sport, league where game.id=' . $id . ' and sport.id=game.sport_id and league.id=game.league_id limit 1;');
-        $teams = DB::select('select team.id as id, team.des as des from game_team, team where game_id=' . $id . ' and team.id=game_team.team_id;');
-        $game_bets = DB::select('select game_bet.id, market.des from game_bet, market where game_id=' . $id . ' and market.id=game_bet.market_id;');
-        $surebets_list=DB::select('SELECT round(surebet.benefit,2) as benefit, market.des as market_des FROM Kirolbet_db.surebet, game, market where surebet.game_id= game.id and game.id=' . $id . ' and market.id=surebet.market_id order by benefit desc;');
-        $surebets_totals=DB::select('SELECT IFNULL(round(avg(surebet.benefit),2),0) as average, count(surebet.id) as cont FROM surebet where surebet.game_id=' . $id . ';');
-        return view('admin.game')->with('game', $game[0])->with('teams', $teams)->with('game_bets', $game_bets)->with('surebets_list',$surebets_list)->with('surebets_totals',$surebets_totals[0]);
+        $game=Game::where('id',$id)->first();
+        return view('admin.game')->with('game', $game);
     }
 }

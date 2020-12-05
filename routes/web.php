@@ -1,13 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard_Controller;
-use App\Http\Controllers\Sport_Controller;
-use App\Http\Controllers\League_controller;
-use App\Http\Controllers\Game_Controller;
-use App\Http\Controllers\GameBet_Controller;
-use App\Http\Controllers\Team_Controller;
+
 use App\Http\Controllers\Admin_Controller;
+use App\Http\Controllers\Main_Controller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +16,12 @@ use App\Http\Controllers\Admin_Controller;
 |
 */
 
-Route::get('/', [Sport_Controller::class, 'getSports']);
-Route::get('/leagues/{id}', [League_controller::class, 'getLeagues']);
-Route::get('/league/{id}', [League_controller::class, 'getLeague']);
-Route::get('/game/{id}', [Game_Controller::class, 'getGame']);
-Route::get('/gamebet/{id}', [GameBet_Controller::class, 'getGamebet']);
-Route::get('/team/{id}', [Team_Controller::class, 'getTeam']);
+Route::get('/', [Main_Controller::class, 'indexSports']);
+Route::get('/leagues/{id}', [Main_Controller::class, 'indexLeagues']);
+Route::get('/league/{id}', [Main_Controller::class, 'indexLeague']);
+Route::get('/game/{id}', [Main_Controller::class, 'indexGame']);
+Route::get('/gamebet/{id}', [Main_Controller::class, 'indexGameBet']);
+Route::get('/team/{id}', [Main_Controller::class, 'indexTeam']);
 
 Route::get('/admin/leagues/{id}', [Admin_Controller::class, 'indexLeagues']);
 Route::get('/admin/league/{id}', [Admin_Controller::class, 'indexLeague']);
