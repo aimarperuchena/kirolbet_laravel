@@ -26,6 +26,7 @@ Route::get('/team/{id}', [Main_Controller::class, 'indexTeam']);
 Route::get('/admin/leagues/{id}', [Admin_Controller::class, 'indexLeagues']);
 Route::get('/admin/league/{id}', [Admin_Controller::class, 'indexLeague']);
 Route::get('/admin/game/{id}', [Admin_Controller::class, 'indexGame']);
+Route::get('/admin/gamebet/{id}', [Admin_Controller::class, 'indexGameBet']);
 
 
 Auth::routes();

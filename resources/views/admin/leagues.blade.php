@@ -50,7 +50,7 @@
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <table class="table table-hover  table-sm table-bordered" id="myTable">
+                                <table class="table table-hover  table-sm table-bordered" id="myTable">
                                         <thead>
                                             <th>Game</th>
                                             <th>Market</th>
@@ -91,7 +91,7 @@
                             <th>League</th>
                         </thead>
                         <tbody>
-                            @foreach($leagues as $league)
+                            @foreach($sport->leagues as $league)
                             <tr>
                                 <td><a href="/admin/league/{{$league->id}}" style="text-decoration:none;">{{$league->des}}</a></td>
 

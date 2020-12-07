@@ -4,7 +4,7 @@
     <div class="card text-left">
 
         <div class="card-body">
-            <h4 class="card-title">{{$league->league}} <a href="/admin/leagues/{{$sport->id}}" class="btn btn-light btn-lg active" role="button" aria-pressed="true">{{$league->sport}}</a>
+            <h4 class="card-title">{{$league->des}} <a href="/admin/leagues/{{$league->sport->id}}" class="btn btn-light btn-lg active" role="button" aria-pressed="true">{{$league->sport->des}}</a>
             </h4>
 
             <div class="row">
@@ -32,10 +32,10 @@
                                             <th>Date</th>
                                         </thead>
                                         <tbody>
-                                            @foreach($games as $game)
+                                            @foreach($league->games as $game)
                                             <tr>
                                                 <td class="row-text"> <a href="/admin/game/{{$game->id}}" style="text-decoration:none;" ">{{$game->game}}</a></td>
-                              <td><a href="/admin/game/ {{$game->id}}" style="text-decoration:none;">{{$game->date_time}}</a></td>
+                              <td><a href="/admin/game/ {{$game->id}}" style="text-decoration:none;">{{$game->date}}</a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -91,7 +91,7 @@
 
                                                                         <div class="card text-left mb-3">
                                                                             <ul class="list-group list-group-flush">
-                                                                                <li class="list-group-item">Games: {{$total_games->cont}}</li>
+                                                                                <li class="list-group-item">Games: {{$league->games->count()}}</li>
                                                                                 <li class="list-group-item">Games Today: {{$games_today}}</li>
                                                                                 <li class="list-group-item">Surebets: {{$totals_surebets->cont}}</li>
                                                                                 <li class="list-group-item">Avg Surebets: {{$totals_surebets->average}}%</li>
@@ -117,7 +117,7 @@
                                                                 </div>
                                                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample2">
                                                                     <div class="card-body">
-                                                                        <table class="table table-hover  table-sm table-bordered" >
+                                                                        <table class="table table-hover  table-sm table-bordered">
                                                                             <thead>
                                                                                 <th>Game</th>
                                                                                 <th>Market</th>
@@ -128,9 +128,11 @@
                                                                             <tbody>
                                                                                 @foreach($surebets_today_list as $surebet)
                                                                                 <tr>
-                                                                                    <td>{{$surebet->game}}</td>
-                                                                                    <td>{{$surebet->market_des}}</td>
-                                                                                    <td>{{$surebet->benefit}}%</td>
+                                                                                    <td class="row-text"> <a href="/admin/gamebet/{{$surebet->game_bet_id}}" style="text-decoration:none;" ">{{$surebet->game}}</a></td>
+                                                                                <td class=" row-text"> <a href="/admin/gamebet/{{$surebet->game_bet_id}}" style="text-decoration:none;" ">{{$surebet->market_des}}</a></td>
+                                                                                <td class=" row-text"> <a href="/admin/gamebet/{{$surebet->game_bet_id}}" style="text-decoration:none;" ">{{$surebet->benefit}}%</a></td>
+
+                                                                                   
 
                                                                                 </tr>
 
@@ -149,20 +151,17 @@
                 </div>
                 <script>
                     $(document).ready(function() {
-                        $(" #myInput").on("keyup", function() {
-                            var value = $(this).val().toLowerCase();
-                            $("#myTable tr").filter(function() {
-                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                            });
-                        });
-                    });
-                    $(document).ready(function() {
-                        $("#teamInput").on("keyup", function() {
-                            var value = $(this).val().toLowerCase();
-                            $("#teamTable tr").filter(function() {
-                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                            });
-                        });
-                    });
-                </script>
-                @endsection
+                        $(" #myInput").on("keyup", function() { var value=$(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).text().toLowerCase().indexOf(value)> -1)
+                                                                                                    });
+                                                                                                    });
+                                                                                                    });
+                                                                                                    $(document).ready(function() {
+                                                                                                    $("#teamInput").on("keyup", function() {
+                                                                                                    var value = $(this).val().toLowerCase();
+                                                                                                    $("#teamTable tr").filter(function() {
+                                                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                                                    });
+                                                                                                    });
+                                                                                                    });
+                                                                                                    </script>
+                                                                                                    @endsection
