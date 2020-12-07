@@ -66,7 +66,7 @@
                                                     <tbody>
                                                         @foreach($game->game_bets as $game_bet)
                                                         <tr>
-                                                            <td><a href="/gamebet/{{$game_bet->id}}" style="text-decoration:none;">{{$game_bet->market->des}}</a></td>
+                                                            <td><a href="/admin/gamebet/{{$game_bet->id}}" style="text-decoration:none;">{{$game_bet->market->des}}</a></td>
                                                         </tr>
                                                         @endforeach
 
@@ -99,15 +99,23 @@
                                                         <tr>
                                                             <th scope="col">Market</th>
                                                             <th scope="col">Benefit</th>
-
+                                                            <th scope="col">Odds</th>
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach($game->surebets as $surebet)
+                                                        @foreach($surebets as $surebet)
                                                         <tr>
-                                                            <td><a href="/gamebet/{{$surebet->id}}" style="text-decoration:none;">{{$surebet->market->des}}</a></td>
-                                                            <td><a href="/gamebet/{{$surebet->id}}" style="text-decoration:none;">{{$surebet->benefit}}%</a></td>
+                                                            <td><a href="/admin/gamebet/{{$surebet->game_bet_id}}" style="text-decoration:none;">{{$surebet->market->des}}</a></td>
+                                                            <td><a href="/admin/gamebet/{{$surebet->game_bet_id}}" style="text-decoration:none;">{{number_format($surebet->benefit,2)}}%</a></td>
+                                                            <td>
+                                                                @foreach($surebet->odds as $surebet_odd)
+                                                            
+                                                                <button type="button" class="btn btn-info m-2 btn-sm"><h5>{{$surebet_odd->odd->des}} <span class="badge badge-dark">{{$surebet_odd->odd->odd}}</span></h5></button>
+                                                                @endforeach
+
+
+                                                            </td>
 
                                                         </tr>
                                                         @endforeach
@@ -115,6 +123,7 @@
 
                                                     </tbody>
                                                 </table>
+                                                {{ $surebets->links() }}
                                             </div>
                                         </div>
                                     </div>

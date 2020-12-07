@@ -13,10 +13,10 @@
                         <div class="card text-left" style="width: 18rem;">
                             <h5 class="card-title p-2">Totals</h5>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Odds: {{$total_odds}}</li>
-                                <li class="list-group-item">Games: {{$total_games}}</li>
-                                <li class="list-group-item">Sports: {{$total_sports}}</li>
-                                <li class="list-group-item">Leagues: {{$total_leagues}}</li>
+                                <li class="list-group-item">Odds: {{$odds_count}}</li>
+                                <li class="list-group-item">Games: {{$games_count}}</li>
+                                <li class="list-group-item">Sports: {{$sports_count}}</li>
+                                <li class="list-group-item">Leagues: {{$leagues_count}}</li>
                                 <li class="list-group-item">Odds Inserted Today: {{$odds_today}}</li>
 
 

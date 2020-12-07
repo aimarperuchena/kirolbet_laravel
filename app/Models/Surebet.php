@@ -31,7 +31,7 @@ class Surebet extends Model
     {
         return $this->belongsTo(Market::class, 'market_id');
     }
-    public function surebet_odds()
+    public function odds()
     {
         return $this->hasMany(Surebet_Odd::class);
     }

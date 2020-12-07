@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Surebet_Odd extends Model
 {
     use HasFactory;
-    protected $table = 'game_bet';
+    protected $table = 'surebet_odd';
     protected $fillable = ['id', 'surebet_id', 'odd_id'];
     public function surebet()
     {

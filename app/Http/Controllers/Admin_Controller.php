@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Sport;
 use App\Models\League;
 use App\Models\Game;
+use App\Models\Game_Bet;
+use App\Models\Odds;
 use App\Models\Surebet;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -14,26 +16,25 @@ class Admin_Controller extends Controller
 {
     public function indexDashboard()
     {
-        $total_odds_query = DB::table('odds')->count();
-        $total_games_query = DB::table('game')->count();
-        $total_sports_query = DB::table('sport')->count();
-        $total_leagues_query = DB::table('league')->count();
+        $sports_count = Sport::count();
+        $odds_count = Odds::count();
+        $games_count = Game::count();
+        $leagues_count = League::count();
+
         $odds_today = DB::table('odds')
             ->whereDate('created_at', Carbon::today())->count();
         $games_today = DB::table('game')
             ->whereDate('date', Carbon::today())->count();
-        $total_odds = number_format($total_odds_query);
-        $game_totals = number_format($total_games_query);
-        $total_sports = number_format($total_sports_query);
-        $total_leagues = number_format($total_leagues_query);
+
         $sports = Sport::simplePaginate(10);
 
 
-        return view('admin.dashboard')->with('game_totals', $game_totals)->with('total_odds', $total_odds)->with('total_games', $game_totals)->with('odds_today', number_format($odds_today))->with('total_sports', $total_sports)->with('total_leagues', $total_leagues)->with('sports', $sports);
+        return view('admin.dashboard')->with('odds_today', number_format($odds_today))->with('sports', $sports)->with('odds_count', $odds_count)->with('sports_count', $sports_count)->with('leagues_count', $leagues_count)->with('games_count', $games_count);
     }
 
     public function indexLeagues($id)
     {
+
         $sport = Sport::where('id', $id)->first();
         $total_leagues = League::where('sport_id', $id)->count();
         $leagues = League::where('sport_id', $id)->get();
@@ -42,7 +43,6 @@ class Admin_Controller extends Controller
         $totals_surebets = DB::select('SELECT count(*) as cont, round(avg(benefit),2) as average FROM surebet where sport_id=' . $id . ';');
 
         $surebets_today = DB::select('SELECT round(avg(surebet.benefit),2) as average, count(surebet.benefit) as cont FROM game, surebet where  game.sport_id=' . $id . '  and game.date=curdate()  and surebet.game_id=game.id;');
-        $surebets_date = DB::select('SELECT round(avg(surebet.benefit),2) as average,count(surebet.benefit) as cont,game.date as game_date FROM game, surebet where  game.sport_id=' . $id . '  and surebet.game_id=game.id group by game.date order by  game_date desc;');
         $surebets_today_list = DB::select('SELECT game.game as game, market.des as market_des, round(surebet.benefit,2) as benefit FROM game, surebet, market where  game.sport_id=' . $id . '  and game.date=curdate()  and surebet.game_id=game.id and market.id=surebet.market_id order by benefit desc limit 10;');
         return view('admin.leagues')->with('leagues', $leagues)->with('total_leagues', $total_leagues)->with('total_games', $total_games)->with('games_today', $games_today)->with('sport', $sport)->with('surebets_today', $surebets_today[0])->with('totals_surebets', $totals_surebets[0])->with('surebets_today_list', $surebets_today_list);
     }
@@ -51,6 +51,7 @@ class Admin_Controller extends Controller
     {
         $surebets_today_list = DB::select('SELECT game.game as game, market.des as market_des, round(surebet.benefit,2) as benefit FROM game, surebet, market where  game.league_id=' . $league_id . '  and surebet.game_id=game.id and market.id=surebet.market_id order by surebet.benefit desc limit 10;');
         $total_games = DB::select('select count(*) as cont from game where league_id=' . $league_id . ';');
+
         $games_today = Game::where('league_id', $league_id)->whereDate('date', Carbon::today())->count();
         $surebets_today = DB::select('SELECT IFNULL(round(avg(surebet.benefit),2), 0) as average, count(surebet.benefit) as cont FROM game, surebet where  game.league_id=' . $league_id . '  and game.date=curdate()  and surebet.game_id=game.id;');
 
@@ -64,7 +65,43 @@ class Admin_Controller extends Controller
 
     public function indexGame($id)
     {
+        $surebets = Surebet::where('game_id', $id)->simplePaginate(3);
         $game = Game::where('id', $id)->first();
-        return view('admin.game')->with('game', $game);
+        return view('admin.game')->with('game', $game)->with('surebets', $surebets);
+    }
+
+    public function indexGameBet($game_bet_id){
+        $game_bet_des = DB::select('SELECT distinct des FROM odds where game_bet_id=' . $game_bet_id . '');
+        $game_bet_info = DB::select('SELECT market.des as des FROM game_bet, market where game_bet.id=' . $game_bet_id . ' and market.id=game_bet.market_id;');
+        $game_bet = Game_Bet::where('id', $game_bet_id)->first();
+        $max_odds = array();
+        $last_odds_array = array();
+        $surebet = 0;
+        $cont = 0;
+        $surebets=Surebet::where('game_bet_id',$game_bet_id)->get();
+        foreach ($game_bet_des as $des) {
+            $odd_des = $des->des;
+            $last_odd = Odds::where([
+                ['des', '=', $odd_des],
+                ['game_bet_id', '=', $game_bet_id],
+            ])->orderBy('created_at', 'desc')->first();
+            $max_odd = Odds::where([
+                ['des', '=', $odd_des],
+                ['game_bet_id', '=', $game_bet_id],
+            ])->max('odd');
+            $min_odd = Odds::where([
+                ['des', '=', $odd_des],
+                ['game_bet_id', '=', $game_bet_id],
+            ])->min('odd');
+            $surebet = $surebet + (1 / $max_odd);
+            $b = (1 - $surebet);
+            $a = $b * 100;
+            $surebet_value = round($a, 3);
+            array_push($last_odds_array, ([$odd_des, $last_odd->odd, $max_odd, $min_odd]));
+        }
+
+
+        return view('admin.game_bet')->with('last_odds', $last_odds_array)->with('market_des', $game_bet_info[0])->with('game_bet', $game_bet)->with('surebet', $surebet_value)->with('surebets',$surebets);
+
     }
 }
