@@ -14,6 +14,11 @@ use Carbon\Carbon;
 
 class Admin_Controller extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function indexDashboard()
     {
         $sports_count = Sport::count();
